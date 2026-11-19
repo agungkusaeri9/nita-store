@@ -42,15 +42,15 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             CustomerSeeder::class,
             OrderSeeder::class,
-            NotificationSeeder::class,
+            // NotificationSeeder::class,
             ProductReviewSeeder::class,
             BannerSeeder::class,
             StoreSettingSeeder::class,
             FaqSeeder::class,
-            AppVersionSeeder::class,
+            // AppVersionSeeder::class,
             AppConfigSeeder::class,
             UserCartSeeder::class,
-            VirtualTryOnSeeder::class,
+            // VirtualTryOnSeeder::class,
         ]);
     }
 }
