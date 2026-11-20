@@ -136,59 +136,29 @@ class RolePermissionSeeder extends Seeder
         $superAdminRole = Role::findOrCreate('super admin', 'web');
         $superAdminRole->syncPermissions(Permission::all());
 
-        // Create Admin role and assign operational permissions
+        // Create Admin role with all operational permissions except user management, roles/permissions, and app configurations
         $adminRole = Role::findOrCreate('admin', 'web');
-        $adminPermissions = [
-            'view dashboard',
+        $excludedAdminPermissions = [
+            // Manajemen Pengguna (User Management)
             'view users',
             'create users',
             'edit users',
-            'view customers',
-            'edit customers',
-            'view products',
-            'create products',
-            'edit products',
-            'import products',
-            'view categories',
-            'create categories',
-            'edit categories',
-            'view variant types',
-            'create variant types',
-            'edit variant types',
-            'view orders',
-            'edit orders',
-            'update order status',
-            'update order payment',
-            'update order shipping',
-            'view banners',
-            'create banners',
-            'edit banners',
-            'toggle banners',
-            'view payment methods',
-            'view couriers',
-            'view locations',
-            'view notifications',
-            'create notifications',
-            'manage notification settings',
-            'view product reviews',
-            'toggle product reviews',
-            'view store settings',
-            'edit store settings',
-            'view privacy policy',
-            'edit privacy policy',
-            'view faqs',
-            'create faqs',
-            'edit faqs',
-            'view app versions',
-            'create app versions',
-            'edit app versions',
-            'delete app versions',
+            'delete users',
+
+            // Peran & Hak Akses (Role & Permission)
+            'view roles',
+            'create roles',
+            'edit roles',
+            'delete roles',
+            'view permissions',
+
+            // Konfigurasi Aplikasi (Configurations)
             'view app configs',
             'create app configs',
             'edit app configs',
             'delete app configs',
-            'view activity logs',
         ];
+        $adminPermissions = array_values(array_diff($permissions, $excludedAdminPermissions));
         $adminRole->syncPermissions($adminPermissions);
 
         // Create Customer role

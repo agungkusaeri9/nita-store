@@ -32,6 +32,21 @@ class DatabaseSeeder extends Seeder
             $sa->assignRole($superAdminRole);
         }
 
+        // 2b. Ensure default Admin User exists and has admin role
+        $adminUser = User::firstOrCreate(
+            ['username' => 'admin'],
+            [
+                'name' => 'Admin',
+                'email' => 'admin@batik.com',
+                'password' => Hash::make('password'),
+            ]
+        );
+
+        $adminRole = Role::where('name', 'admin')->first();
+        if ($adminRole && ! $adminUser->hasRole('admin')) {
+            $adminUser->assignRole($adminRole);
+        }
+
         // 3. Seed locations (provinces, cities, subdistricts from RajaOngkir) and other core data
         $this->call([
             LocationSeeder::class,

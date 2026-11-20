@@ -14,6 +14,7 @@ import {
     Bell,
     Smartphone,
     SlidersHorizontal,
+    UserCog,
 } from 'lucide-vue-next';
 import { computed } from 'vue';
 import AppLogo from '@/components/AppLogo.vue';
@@ -82,6 +83,12 @@ const rawNavItems = computed<NavItem[]>(() => [
         href: '#',
         icon: Database,
         items: [
+            {
+                title: 'Kelola User',
+                href: '/dashboard/users',
+                icon: UserCog,
+                permission: 'view users',
+            },
             {
                 title: 'Pelanggan',
                 href: '/dashboard/customers',
