@@ -59,7 +59,7 @@ const props = defineProps<Props>();
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Lokasi (Provinsi)', href: '/locations' },
+    { title: 'Lokasi (Provinsi)', href: '/dashboard/locations' },
     { title: `Kota di ${props.province.province_name}`, href: '#' },
 ];
 
@@ -71,7 +71,7 @@ let searchTimeout: ReturnType<typeof setTimeout>;
 
 const fetchCities = () => {
     isLoading.value = true;
-    router.get(`/locations/provinces/${props.province.province_id}/cities`, {
+    router.get(`/dashboard/locations/provinces/${props.province.province_id}/cities`, {
         search: search.value,
         per_page: perPage.value
     }, {
@@ -108,7 +108,7 @@ const clearSearch = () => {
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div class="space-y-1">
                 <div class="flex items-center gap-3">
-                    <Link href="/locations">
+                    <Link href="/dashboard/locations">
                         <Button variant="ghost" size="icon" class="h-8 w-8 rounded-full">
                             <ArrowLeft class="h-4 w-4" />
                         </Button>
@@ -198,7 +198,7 @@ const clearSearch = () => {
                                 {{ city.postal_code }}
                             </td>
                             <td class="p-4 align-middle text-right">
-                                <Link :href="`/locations/cities/${city.city_id}/subdistricts`">
+                                <Link :href="`/dashboard/locations/cities/${city.city_id}/subdistricts`">
                                     <Button variant="outline" size="sm" class="h-8 gap-1">
                                         <Eye class="h-3.5 w-3.5" />
                                         <span class="sr-only sm:not-sr-only">Lihat Kecamatan</span>

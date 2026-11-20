@@ -50,7 +50,6 @@ interface Product {
     stock: number;
     sku: string | null;
     weight: number;
-    is_virtual_try_on: boolean;
     is_active: boolean;
     images: ProductImage[];
     variant_values: number[];
@@ -67,7 +66,7 @@ const props = defineProps<Props>();
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Produk', href: '#' },
-    { title: 'Semua Produk', href: '/products' },
+    { title: 'Semua Produk', href: '/dashboard/products' },
     { title: 'Edit Produk', href: '#' },
 ];
 
@@ -81,7 +80,6 @@ const form = useForm({
     stock: props.product.stock.toString(),
     sku: props.product.sku || '',
     weight: props.product.weight.toString(),
-    is_virtual_try_on: Boolean(props.product.is_virtual_try_on),
     is_active: props.product.is_active ? 'true' : 'false',
     primary_image: null as File | null,
     gallery_images: [] as File[],
@@ -166,7 +164,7 @@ const submit = () => {
     form.transform((data) => ({
         ...data,
         is_active: data.is_active === 'true' ? true : false,
-    })).post(`/products/${props.product.id}`);
+    })).post(`/dashboard/products/${props.product.id}`);
 };
 </script>
 
@@ -354,17 +352,6 @@ const submit = () => {
                                 </SelectContent>
                             </Select>
                         </div>
-                        
-                            <div class="flex items-center justify-between rounded-lg border p-3">
-                                <div class="space-y-0.5">
-                                    <Label class="text-sm">Virtual Try-On</Label>
-                                    <p class="text-xs text-muted-foreground">Aktifkan dukungan AR.</p>
-                                </div>
-                                <label class="relative inline-flex cursor-pointer items-center">
-                                    <input type="checkbox" v-model="form.is_virtual_try_on" class="peer sr-only" />
-                                    <div class="h-[1.15rem] w-8 rounded-full bg-input transition-all after:absolute after:start-[2px] after:top-[2px] after:h-4 after:w-4 after:rounded-full after:bg-background after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-[calc(100%-2px)] peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background"></div>
-                                </label>
-                            </div>
                     </CardContent>
                 </Card>
 
@@ -451,7 +438,7 @@ const submit = () => {
                         <Package v-else class="h-4 w-4" />
                         Simpan Perubahan
                     </Button>
-                    <Link href="/products">
+                    <Link href="/dashboard/products">
                         <Button type="button" variant="outline" class="w-full">Batal</Button>
                     </Link>
                 </div>

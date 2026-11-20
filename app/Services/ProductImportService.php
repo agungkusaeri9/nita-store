@@ -68,7 +68,6 @@ class ProductImportService
                     'stock' => intval($data['stock'] ?? 0),
                     'sku' => $data['sku'] ?? null,
                     'weight' => intval($data['weight'] ?? 0),
-                    'is_virtual_try_on' => isset($data['is_virtual_try_on']) ? filter_var($data['is_virtual_try_on'], FILTER_VALIDATE_BOOLEAN) : false,
                     'is_active' => isset($data['is_active']) ? filter_var($data['is_active'], FILTER_VALIDATE_BOOLEAN) : true,
                 ]);
 

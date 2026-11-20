@@ -58,7 +58,6 @@ class ProductsImport implements ToCollection, WithHeadingRow
                     'stock' => intval($row['stock'] ?? 0),
                     'sku' => $row['sku'] ?? null,
                     'weight' => intval($row['weight'] ?? 0),
-                    'is_virtual_try_on' => isset($row['is_virtual_try_on']) ? filter_var($row['is_virtual_try_on'], FILTER_VALIDATE_BOOLEAN) : false,
                     'is_active' => isset($row['is_active']) ? filter_var($row['is_active'], FILTER_VALIDATE_BOOLEAN) : true,
                 ]);
 

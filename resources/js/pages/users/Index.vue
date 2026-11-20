@@ -67,7 +67,7 @@ const props = defineProps<Props>();
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Pengguna', href: '/users' },
+    { title: 'Pengguna', href: '/dashboard/users' },
 ];
 
 const filterState = reactive({
@@ -78,7 +78,7 @@ const filterState = reactive({
 // Search functionality
 const debouncedSearch = useDebounceFn(() => {
     router.get(
-        '/users',
+        '/dashboard/users',
         { ...filterState },
         { preserveState: true, replace: true },
     );
@@ -115,7 +115,7 @@ const confirmDelete = (user: User) => {
 
 const executeDelete = () => {
     if (userToDelete.value) {
-        router.delete(`/users/${userToDelete.value.id}`, {
+        router.delete(`/dashboard/users/${userToDelete.value.id}`, {
             onSuccess: () => {
                 isDeleteDialogOpen.value = false;
                 userToDelete.value = null;
@@ -150,7 +150,7 @@ const perPageOptions = ['10', '20', '30', '40', '50', '100'];
             </div>
 
             <Button v-if="can('create users')" as-child class="shrink-0">
-                <Link href="/users/create">
+                <Link href="/dashboard/users/create">
                     <Plus class="mr-2 h-4 w-4" />
                     Tambah Pengguna
                 </Link>
@@ -297,7 +297,7 @@ const perPageOptions = ['10', '20', '30', '40', '50', '100'];
                                         as-child
                                         title="Edit Pengguna"
                                     >
-                                        <Link :href="`/users/${user.id}/edit`">
+                                        <Link :href="`/dashboard/users/${user.id}/edit`">
                                             <Edit class="h-4 w-4" />
                                         </Link>
                                     </Button>

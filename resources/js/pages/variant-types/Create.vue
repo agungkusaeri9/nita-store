@@ -20,8 +20,8 @@ import { ref, watch } from 'vue';
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Produk', href: '#' },
-    { title: 'Varian Produk', href: '/variant-types' },
-    { title: 'Tambah Varian', href: '/variant-types/create' },
+    { title: 'Varian Produk', href: '/dashboard/variant-types' },
+    { title: 'Tambah Varian', href: '/dashboard/variant-types/create' },
 ];
 
 const form = useForm({
@@ -66,7 +66,7 @@ const removeValue = (index: number) => {
 };
 
 const submit = () => {
-    form.post('/variant-types');
+    form.post('/dashboard/variant-types');
 };
 </script>
 
@@ -215,7 +215,7 @@ const submit = () => {
                         <Layers v-else class="h-4 w-4" />
                         Simpan Varian
                     </Button>
-                    <Link href="/variant-types">
+                    <Link href="/dashboard/variant-types">
                         <Button type="button" variant="outline" class="w-full">Batal</Button>
                     </Link>
                 </div>

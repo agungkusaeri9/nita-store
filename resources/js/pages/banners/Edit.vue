@@ -69,8 +69,8 @@ const props = defineProps<Props>();
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Banner Promosi', href: '/banners' },
-    { title: 'Edit Banner', href: `/banners/${props.banner.id}/edit` },
+    { title: 'Banner Promosi', href: '/dashboard/banners' },
+    { title: 'Edit Banner', href: `/dashboard/banners/${props.banner.id}/edit` },
 ];
 
 const form = useForm({
@@ -122,7 +122,7 @@ const formatRupiah = (angka: string) => {
 };
 
 const submit = () => {
-    form.post(`/banners/${props.banner.id}`, {
+    form.post(`/dashboard/banners/${props.banner.id}`, {
         preserveScroll: true,
     });
 };
@@ -139,7 +139,7 @@ const submit = () => {
             <div class="space-y-1">
                 <div class="flex items-center gap-2">
                     <Button variant="ghost" size="icon" as-child class="h-8 w-8">
-                        <Link href="/banners">
+                        <Link href="/dashboard/banners">
                             <ArrowLeft class="h-4 w-4" />
                         </Link>
                     </Button>
@@ -154,7 +154,7 @@ const submit = () => {
 
             <div class="flex items-center gap-2 ml-10 sm:ml-0">
                 <Button variant="outline" as-child>
-                    <Link href="/banners">
+                    <Link href="/dashboard/banners">
                         Batal
                     </Link>
                 </Button>

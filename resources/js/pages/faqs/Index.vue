@@ -79,7 +79,7 @@ const props = defineProps<Props>();
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Pengaturan', href: '#' },
-    { title: 'FAQ (Tanya Jawab)', href: '/faqs' },
+    { title: 'FAQ (Tanya Jawab)', href: '/dashboard/faqs' },
 ];
 
 const search = ref(props.filters.search || '');
@@ -92,7 +92,7 @@ watch([search, category, perPage], () => {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
         router.get(
-            '/faqs',
+            '/dashboard/faqs',
             {
                 search: search.value,
                 category: category.value,
@@ -137,7 +137,7 @@ const openEditModal = (faq: Faq) => {
 
 const submitForm = () => {
     if (editingFaq.value) {
-        form.put(`/faqs/${editingFaq.value.id}`, {
+        form.put(`/dashboard/faqs/${editingFaq.value.id}`, {
             preserveScroll: true,
             onSuccess: () => {
                 isModalOpen.value = false;
@@ -146,7 +146,7 @@ const submitForm = () => {
             },
         });
     } else {
-        form.post('/faqs', {
+        form.post('/dashboard/faqs', {
             preserveScroll: true,
             onSuccess: () => {
                 isModalOpen.value = false;
@@ -168,7 +168,7 @@ const confirmDelete = (faq: Faq) => {
 
 const executeDelete = () => {
     if (faqToDelete.value) {
-        router.delete(`/faqs/${faqToDelete.value.id}`, {
+        router.delete(`/dashboard/faqs/${faqToDelete.value.id}`, {
             preserveScroll: true,
             onSuccess: () => {
                 isDeleteDialogOpen.value = false;

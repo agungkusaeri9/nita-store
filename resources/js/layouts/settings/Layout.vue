@@ -38,7 +38,7 @@ const currentNav = computed(() =>
 
 const breadcrumbs = computed<BreadcrumbItem[]>(() => [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Pengaturan', href: '/settings/profile' },
+    { title: 'Pengaturan', href: '/dashboard/settings/profile' },
     { title: currentNav.value?.title || 'Pengaturan', href: '#' },
 ]);
 </script>

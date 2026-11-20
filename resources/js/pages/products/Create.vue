@@ -43,8 +43,8 @@ const props = defineProps<Props>();
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Produk', href: '#' },
-    { title: 'Semua Produk', href: '/products' },
-    { title: 'Tambah Produk', href: '/products/create' },
+    { title: 'Semua Produk', href: '/dashboard/products' },
+    { title: 'Tambah Produk', href: '/dashboard/products/create' },
 ];
 
 const form = useForm({
@@ -56,7 +56,6 @@ const form = useForm({
     stock: '',
     sku: '',
     weight: '',
-    is_virtual_try_on: false,
     is_active: 'true',
     primary_image: null as File | null,
     gallery_images: [] as File[],
@@ -148,7 +147,7 @@ const submit = () => {
     form.transform((data) => ({
         ...data,
         is_active: data.is_active === 'true' ? true : false,
-    })).post('/products');
+    })).post('/dashboard/products');
 };
 </script>
 
@@ -337,17 +336,6 @@ const submit = () => {
                                 </SelectContent>
                             </Select>
                         </div>
-                        
-                        <div class="flex items-center justify-between rounded-lg border p-3">
-                            <div class="space-y-0.5">
-                                <Label class="text-sm">Virtual Try-On</Label>
-                                <p class="text-xs text-muted-foreground">Aktifkan dukungan AR.</p>
-                            </div>
-                            <label class="relative inline-flex cursor-pointer items-center">
-                                <input type="checkbox" v-model="form.is_virtual_try_on" class="peer sr-only" />
-                                <div class="h-[1.15rem] w-8 rounded-full bg-input transition-all after:absolute after:start-[2px] after:top-[2px] after:h-4 after:w-4 after:rounded-full after:bg-background after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-[calc(100%-2px)] peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background"></div>
-                            </label>
-                        </div>
                     </CardContent>
                 </Card>
 
@@ -416,7 +404,7 @@ const submit = () => {
                         <Package v-else class="h-4 w-4" />
                         Simpan Produk
                     </Button>
-                    <Link href="/products">
+                    <Link href="/dashboard/products">
                         <Button type="button" variant="outline" class="w-full">Batal</Button>
                     </Link>
                 </div>

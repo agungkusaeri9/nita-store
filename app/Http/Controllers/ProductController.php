@@ -106,7 +106,6 @@ class ProductController extends Controller
                 'stock' => $product->stock,
                 'sku' => $product->sku,
                 'weight' => $product->weight,
-                'is_virtual_try_on' => (bool) $product->is_virtual_try_on,
                 'is_active' => (bool) $product->is_active,
                 'created_at' => $product->created_at,
                 'category' => $product->category ? [
@@ -155,7 +154,6 @@ class ProductController extends Controller
                 'stock' => $product->stock,
                 'sku' => $product->sku,
                 'weight' => $product->weight,
-                'is_virtual_try_on' => (bool) $product->is_virtual_try_on,
                 'is_active' => (bool) $product->is_active,
                 'images' => $product->images->map(fn ($img) => [
                     'id' => $img->id,

@@ -14,7 +14,6 @@ import {
     Bell,
     Smartphone,
     SlidersHorizontal,
-    Sparkles,
 } from 'lucide-vue-next';
 import { computed } from 'vue';
 import AppLogo from '@/components/AppLogo.vue';
@@ -45,14 +44,14 @@ const rawNavItems = computed<NavItem[]>(() => [
     },
     {
         title: 'Pesanan',
-        href: '/orders',
+        href: '/dashboard/orders',
         icon: ShoppingBag,
         permission: 'view orders',
         badge: page.props.pendingOrdersCount ?? 0,
     },
     {
         title: 'Banner Promosi',
-        href: '/banners',
+        href: '/dashboard/banners',
         icon: Smartphone,
         permission: 'view banners',
     },
@@ -63,40 +62,18 @@ const rawNavItems = computed<NavItem[]>(() => [
         items: [
             {
                 title: 'Semua Produk',
-                href: '/products',
+                href: '/dashboard/products',
                 permission: 'view products',
             },
             {
                 title: 'Kategori Produk',
-                href: '/categories',
+                href: '/dashboard/categories',
                 permission: 'view categories',
             },
             {
                 title: 'Varian Produk',
-                href: '/variant-types',
+                href: '/dashboard/variant-types',
                 permission: 'view variant types',
-            },
-        ],
-    },
-    {
-        title: 'Fashn AI',
-        href: '#',
-        icon: Sparkles,
-        items: [
-            {
-                title: 'Model',
-                href: '/virtual-try-on-models',
-                permission: 'view virtual try on models',
-            },
-            {
-                title: 'Product Virtual Try-On',
-                href: '/product-virtual-try-ons',
-                permission: 'view product virtual try ons',
-            },
-            {
-                title: 'Pengaturan',
-                href: '/fashn-ai/settings',
-                permission: 'view app configs',
             },
         ],
     },
@@ -107,19 +84,19 @@ const rawNavItems = computed<NavItem[]>(() => [
         items: [
             {
                 title: 'Pelanggan',
-                href: '/customers',
+                href: '/dashboard/customers',
                 icon: Users,
                 permission: 'view customers',
             },
             {
                 title: 'Metode Pembayaran',
-                href: '/payment-methods',
+                href: '/dashboard/payment-methods',
                 icon: CreditCard,
                 permission: 'view payment methods',
             },
             {
                 title: 'Kurir (RajaOngkir)',
-                href: '/couriers',
+                href: '/dashboard/couriers',
                 icon: Truck,
                 permission: 'view couriers',
             },
@@ -132,12 +109,12 @@ const rawNavItems = computed<NavItem[]>(() => [
         items: [
             {
                 title: 'Peran (Roles)',
-                href: '/roles',
+                href: '/dashboard/roles',
                 permission: 'view roles',
             },
             {
                 title: 'Hak Akses (Permissions)',
-                href: '/permissions',
+                href: '/dashboard/permissions',
                 permission: 'view permissions',
             },
         ],
@@ -149,12 +126,12 @@ const rawNavItems = computed<NavItem[]>(() => [
         items: [
             {
                 title: 'Daftar Notifikasi',
-                href: '/notifications',
+                href: '/dashboard/notifications',
                 permission: 'view notifications',
             },
             {
                 title: 'Template Pengaturan',
-                href: '/notification-settings',
+                href: '/dashboard/notification-settings',
                 permission: 'manage notification settings',
             },
         ],
@@ -166,27 +143,22 @@ const rawNavItems = computed<NavItem[]>(() => [
         items: [
             {
                 title: 'Semua Konfigurasi',
-                href: '/configurations',
+                href: '/dashboard/configurations',
                 permission: 'view app configs',
             },
             {
                 title: 'RajaOngkir',
-                href: '/configurations/rajaongkir',
-                permission: 'view app configs',
-            },
-            {
-                title: 'Fashn AI',
-                href: '/configurations/fashn-ai',
+                href: '/dashboard/configurations/rajaongkir',
                 permission: 'view app configs',
             },
             {
                 title: 'Geoapify',
-                href: '/configurations/geoapify',
+                href: '/dashboard/configurations/geoapify',
                 permission: 'view app configs',
             },
             {
                 title: 'Firebase (FCM)',
-                href: '/configurations/firebase',
+                href: '/dashboard/configurations/firebase',
                 permission: 'view app configs',
             },
         ],
@@ -198,34 +170,24 @@ const rawNavItems = computed<NavItem[]>(() => [
         items: [
             {
                 title: 'Pengaturan Toko',
-                href: '/store-settings',
+                href: '/dashboard/store-settings',
                 permission: 'view store settings',
             },
             {
                 title: 'Kebijakan & Privasi',
-                href: '/privacy-policy-settings',
+                href: '/dashboard/privacy-policy-settings',
                 permission: 'view privacy policy',
             },
             {
-                title: 'Landing Page',
-                href: '/landing-page-settings',
-                permission: 'view landing page settings',
-            },
-            {
                 title: 'FAQ (Tanya Jawab)',
-                href: '/faqs',
+                href: '/dashboard/faqs',
                 permission: 'view faqs',
-            },
-            {
-                title: 'Manajemen Aplikasi',
-                href: '/app-versions',
-                permission: 'view app versions',
             },
         ],
     },
     {
         title: 'Log Aktivitas',
-        href: '/activity',
+        href: '/dashboard/activity',
         icon: History,
         permission: 'view activity logs',
     },
@@ -270,11 +232,11 @@ const mainNavItems = computed<NavItem[]>(() => {
 </script>
 
 <template>
-    <Sidebar collapsible="icon" variant="inset">
+    <Sidebar collapsible="icon" variant="sidebar">
         <SidebarHeader>
             <SidebarMenu>
                 <SidebarMenuItem>
-                    <SidebarMenuButton size="lg" as-child>
+                    <SidebarMenuButton size="lg" as-child class="h-auto! justify-center py-2 hover:bg-transparent active:bg-transparent group-data-[collapsible=icon]:h-8!">
                         <Link href="/dashboard">
                             <AppLogo />
                         </Link>

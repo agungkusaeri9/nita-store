@@ -89,7 +89,7 @@ const props = defineProps<Props>();
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Metode Pembayaran', href: '/payment-methods' },
+    { title: 'Metode Pembayaran', href: '/dashboard/payment-methods' },
 ];
 
 const search = ref(props.filters.search || '');
@@ -101,7 +101,7 @@ let searchTimeout: ReturnType<typeof setTimeout>;
 
 const fetchPaymentMethods = () => {
     isLoading.value = true;
-    router.get('/payment-methods', {
+    router.get('/dashboard/payment-methods', {
         search: search.value,
         status: status.value,
         per_page: perPage.value
@@ -187,7 +187,7 @@ const openEditModal = (method: PaymentMethod) => {
 
 const submitForm = () => {
     if (isEditing.value && currentId.value) {
-        form.post(`/payment-methods/${currentId.value}`, {
+        form.post(`/dashboard/payment-methods/${currentId.value}`, {
             preserveScroll: true,
             onSuccess: () => {
                 form.reset();
@@ -195,7 +195,7 @@ const submitForm = () => {
             },
         });
     } else {
-        form.post('/payment-methods', {
+        form.post('/dashboard/payment-methods', {
             preserveScroll: true,
             onSuccess: () => {
                 form.reset();
@@ -216,7 +216,7 @@ const confirmDelete = (method: PaymentMethod) => {
 
 const executeDelete = () => {
     if (itemToDelete.value) {
-        router.delete(`/payment-methods/${itemToDelete.value.id}`, {
+        router.delete(`/dashboard/payment-methods/${itemToDelete.value.id}`, {
             onSuccess: () => {
                 isDeleteDialogOpen.value = false;
                 itemToDelete.value = null;

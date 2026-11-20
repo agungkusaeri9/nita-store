@@ -26,7 +26,6 @@ return new class extends Migration
             $table->integer('weight')->default(0)->comment('Weight in grams');
 
             // Flags
-            $table->boolean('is_virtual_try_on')->default(false);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

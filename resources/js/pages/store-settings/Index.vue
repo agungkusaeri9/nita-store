@@ -78,7 +78,7 @@ const props = defineProps<Props>();
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Pengaturan', href: '#' },
-    { title: 'Toko', href: '/store-settings' },
+    { title: 'Toko', href: '/dashboard/store-settings' },
 ];
 
 const fileInput = ref<HTMLInputElement | null>(null);
@@ -114,7 +114,7 @@ const loadCities = async (provinceId: string) => {
         cities.value = [];
         return;
     }
-    const response = await fetch(`/api/locations/cities?province_id=${provinceId}`);
+    const response = await fetch(`/dashboard/api/locations/cities?province_id=${provinceId}`);
     cities.value = await response.json();
 };
 
@@ -123,7 +123,7 @@ const loadSubdistricts = async (cityId: string) => {
         subdistricts.value = [];
         return;
     }
-    const response = await fetch(`/api/locations/subdistricts?city_id=${cityId}`);
+    const response = await fetch(`/dashboard/api/locations/subdistricts?city_id=${cityId}`);
     subdistricts.value = await response.json();
 };
 
@@ -151,7 +151,7 @@ const removeLogo = () => {
 };
 
 const submitForm = () => {
-    form.post('/store-settings', {
+    form.post('/dashboard/store-settings', {
         preserveScroll: true,
         onSuccess: () => {
             if (form.logo === null) {
@@ -167,7 +167,7 @@ const toggleCourier = (courier: Courier) => {
     if (togglingId.value !== null) return;
 
     togglingId.value = courier.id;
-    router.post(`/couriers/${courier.id}/toggle`, {}, {
+    router.post(`/dashboard/couriers/${courier.id}/toggle`, {}, {
         preserveScroll: true,
         preserveState: true,
         onFinish: () => (togglingId.value = null),

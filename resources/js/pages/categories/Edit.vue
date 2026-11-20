@@ -33,7 +33,7 @@ const props = defineProps<{
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Produk', href: '#' },
-    { title: 'Kategori Produk', href: '/categories' },
+    { title: 'Kategori Produk', href: '/dashboard/categories' },
     { title: `Edit: ${props.category.name}`, href: '#' },
 ];
 
@@ -77,7 +77,7 @@ const removeSelectedImage = () => {
 };
 
 const submit = () => {
-    form.post(`/categories/${props.category.id}`);
+    form.post(`/dashboard/categories/${props.category.id}`);
 };
 </script>
 
@@ -261,7 +261,7 @@ const submit = () => {
                     <!-- Action Buttons -->
                     <div class="flex justify-end gap-4 border-t pt-4">
                         <Button type="button" variant="outline" as-child>
-                            <Link href="/categories">Batal</Link>
+                            <Link href="/dashboard/categories">Batal</Link>
                         </Button>
                         <Button type="submit" :disabled="form.processing">
                             {{

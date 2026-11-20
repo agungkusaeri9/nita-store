@@ -73,8 +73,8 @@ const props = defineProps<Props>();
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Notifikasi', href: '/notifications' },
-    { title: 'Template & Pengaturan', href: '/notification-settings' },
+    { title: 'Notifikasi', href: '/dashboard/notifications' },
+    { title: 'Template & Pengaturan', href: '/dashboard/notification-settings' },
 ];
 
 const search = ref('');
@@ -138,7 +138,7 @@ const openEditModal = (setting: NotificationSetting) => {
 
 const submitForm = () => {
     if (editingSetting.value && editingSetting.value.id) {
-        form.put(`/notification-settings/${editingSetting.value.id}`, {
+        form.put(`/dashboard/notification-settings/${editingSetting.value.id}`, {
             preserveScroll: true,
             onSuccess: () => {
                 isModalOpen.value = false;
@@ -147,7 +147,7 @@ const submitForm = () => {
             },
         });
     } else {
-        form.post('/notification-settings', {
+        form.post('/dashboard/notification-settings', {
             preserveScroll: true,
             onSuccess: () => {
                 isModalOpen.value = false;
@@ -160,7 +160,7 @@ const submitForm = () => {
 
 // Quick Toggle Status in Table
 const toggleStatus = (setting: NotificationSetting) => {
-    router.post(`/notification-settings/${setting.id}/toggle`, {}, {
+    router.post(`/dashboard/notification-settings/${setting.id}/toggle`, {}, {
         preserveScroll: true,
     });
 };
@@ -176,7 +176,7 @@ const confirmDelete = (setting: NotificationSetting) => {
 
 const executeDelete = () => {
     if (settingToDelete.value) {
-        router.delete(`/notification-settings/${settingToDelete.value.id}`, {
+        router.delete(`/dashboard/notification-settings/${settingToDelete.value.id}`, {
             preserveScroll: true,
             onSuccess: () => {
                 isDeleteDialogOpen.value = false;
@@ -214,7 +214,7 @@ const getRecipientBadge = (type: string) => {
             <div class="space-y-1">
                 <div class="flex items-center gap-3">
                     <Button as-child variant="outline" size="icon" class="h-9 w-9">
-                        <Link href="/notifications">
+                        <Link href="/dashboard/notifications">
                             <ChevronLeft class="h-4 w-4" />
                         </Link>
                     </Button>

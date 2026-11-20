@@ -63,8 +63,8 @@ const props = defineProps<Props>();
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Notifikasi', href: '/notifications' },
-    { title: 'Kirim Notifikasi', href: '/notifications/create' },
+    { title: 'Notifikasi', href: '/dashboard/notifications' },
+    { title: 'Kirim Notifikasi', href: '/dashboard/notifications/create' },
 ];
 
 const form = useForm({
@@ -140,7 +140,7 @@ const submit = () => {
     form.transform((data) => ({
         ...data,
         notification_setting_id: (!data.notification_setting_id || data.notification_setting_id === 'none') ? null : Number(data.notification_setting_id),
-    })).post('/notifications', {
+    })).post('/dashboard/notifications', {
         preserveScroll: true,
     });
 };
@@ -158,7 +158,7 @@ const submit = () => {
             <div class="space-y-1">
                 <div class="flex items-center gap-3">
                     <Button as-child variant="outline" size="icon" class="h-9 w-9">
-                        <Link href="/notifications">
+                        <Link href="/dashboard/notifications">
                             <ChevronLeft class="h-4 w-4" />
                         </Link>
                     </Button>
@@ -470,7 +470,7 @@ const submit = () => {
                         </Button>
 
                         <Button as-child variant="outline" class="w-full">
-                            <Link href="/notifications">
+                            <Link href="/dashboard/notifications">
                                 Batal
                             </Link>
                         </Button>

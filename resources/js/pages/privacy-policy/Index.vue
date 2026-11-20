@@ -23,7 +23,7 @@ const props = defineProps<Props>();
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Pengaturan', href: '#' },
-    { title: 'Kebijakan & Privasi', href: '/privacy-policy-settings' },
+    { title: 'Kebijakan & Privasi', href: '/dashboard/privacy-policy-settings' },
 ];
 
 const form = useForm({
@@ -33,7 +33,7 @@ const form = useForm({
 });
 
 const submitForm = () => {
-    form.post('/privacy-policy-settings', {
+    form.post('/dashboard/privacy-policy-settings', {
         preserveScroll: true,
     });
 };

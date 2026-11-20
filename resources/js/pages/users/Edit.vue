@@ -34,7 +34,7 @@ const props = defineProps<{
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Pengguna', href: '/users' },
+    { title: 'Pengguna', href: '/dashboard/users' },
     { title: `Edit Pengguna: ${props.user.name}`, href: '#' },
 ];
 
@@ -56,7 +56,7 @@ const toggleRole = (name: string, checked: boolean | 'indeterminate') => {
 };
 
 const submit = () => {
-    form.patch(`/users/${props.user.id}`);
+    form.patch(`/dashboard/users/${props.user.id}`);
 };
 </script>
 
@@ -181,7 +181,7 @@ const submit = () => {
 
                     <div class="flex justify-end gap-4">
                         <Button type="button" variant="outline" as-child>
-                            <Link href="/users">Batal</Link>
+                            <Link href="/dashboard/users">Batal</Link>
                         </Button>
                         <Button type="submit" :disabled="form.processing">
                             {{

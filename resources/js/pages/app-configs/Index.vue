@@ -54,7 +54,6 @@ import {
     Plus,
     Search,
     SlidersHorizontal,
-    Sparkles,
     Trash2,
     Truck,
     X,
@@ -96,7 +95,7 @@ const props = defineProps<Props>();
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Konfigurasi', href: '#' },
-    { title: 'Semua Konfigurasi', href: '/configurations' },
+    { title: 'Semua Konfigurasi', href: '/dashboard/configurations' },
 ];
 
 const search = ref(props.filters.search || '');
@@ -110,7 +109,7 @@ let searchTimeout: ReturnType<typeof setTimeout>;
 const fetchConfigs = () => {
     isLoading.value = true;
     router.get(
-        '/configurations',
+        '/dashboard/configurations',
         {
             search: search.value,
             per_page: perPage.value,
@@ -193,14 +192,14 @@ const openEditModal = (item: AppConfigItem) => {
 
 const submitForm = () => {
     if (isEditing.value && currentId.value) {
-        form.put(`/app-configs/${currentId.value}`, {
+        form.put(`/dashboard/app-configs/${currentId.value}`, {
             onSuccess: () => {
                 isModalOpen.value = false;
                 form.reset();
             },
         });
     } else {
-        form.post('/app-configs', {
+        form.post('/dashboard/app-configs', {
             onSuccess: () => {
                 isModalOpen.value = false;
                 form.reset();
@@ -220,7 +219,7 @@ const confirmDelete = (item: AppConfigItem) => {
 
 const executeDelete = () => {
     if (itemToDelete.value) {
-        router.delete(`/app-configs/${itemToDelete.value.id}`, {
+        router.delete(`/dashboard/app-configs/${itemToDelete.value.id}`, {
             onSuccess: () => {
                 isDeleteDialogOpen.value = false;
                 itemToDelete.value = null;
@@ -259,19 +258,13 @@ const isKeySensitive = (key: string): boolean => {
                 </p>
             </div>
             <div class="flex flex-wrap items-center gap-2">
-                <Link href="/configurations/rajaongkir">
+                <Link href="/dashboard/configurations/rajaongkir">
                     <Button variant="outline" size="sm" class="gap-1.5">
                         <Truck class="h-4 w-4 text-blue-600" />
                         RajaOngkir
                     </Button>
                 </Link>
-                <Link href="/configurations/fashn-ai">
-                    <Button variant="outline" size="sm" class="gap-1.5">
-                        <Sparkles class="h-4 w-4 text-purple-600" />
-                        Fashn AI
-                    </Button>
-                </Link>
-                <Link href="/configurations/geoapify">
+                <Link href="/dashboard/configurations/geoapify">
                     <Button variant="outline" size="sm" class="gap-1.5">
                         <MapPin class="h-4 w-4 text-emerald-600" />
                         Geoapify
@@ -517,7 +510,7 @@ const isKeySensitive = (key: string): boolean => {
                             <Input
                                 id="key"
                                 v-model="form.key"
-                                placeholder="misal: rajaongkir_api_key, fashn_api_key"
+                                placeholder="misal: rajaongkir_api_key, geoapify_api_key"
                                 :disabled="form.processing"
                                 class="font-mono text-xs"
                             />

@@ -108,7 +108,7 @@ class ProductController extends Controller
         $products = Product::query()
             ->where('is_active', true)
             ->with(['category', 'images', 'variantValues.variantType'])
-            ->orderByRaw('is_virtual_try_on DESC, id DESC')
+            ->orderByDesc('id')
             ->limit($limit)
             ->get();
 

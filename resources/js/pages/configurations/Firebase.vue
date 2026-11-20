@@ -45,7 +45,7 @@ const props = defineProps<Props>();
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Konfigurasi', href: '#' },
-    { title: 'Firebase (FCM)', href: '/configurations/firebase' },
+    { title: 'Firebase (FCM)', href: '/dashboard/configurations/firebase' },
 ];
 
 const isCopied = ref(false);
@@ -56,7 +56,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post('/configurations/firebase', {
+    form.post('/dashboard/configurations/firebase', {
         preserveScroll: true,
     });
 };
@@ -246,7 +246,7 @@ const copyJson = async (text: string) => {
                     </CardHeader>
                     <CardContent class="space-y-2 text-xs">
                         <Link
-                            href="/notifications"
+                            href="/dashboard/notifications"
                             class="flex items-center justify-between rounded-md border p-2.5 transition-colors hover:bg-muted"
                         >
                             <span class="flex items-center gap-2 font-medium">
@@ -256,7 +256,7 @@ const copyJson = async (text: string) => {
                             <ExternalLink class="h-3.5 w-3.5 text-muted-foreground" />
                         </Link>
                         <Link
-                            href="/configurations"
+                            href="/dashboard/configurations"
                             class="flex items-center justify-between rounded-md border p-2.5 transition-colors hover:bg-muted"
                         >
                             <span class="flex items-center gap-2 font-medium">

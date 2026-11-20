@@ -26,9 +26,9 @@ const props = defineProps<{
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Customer', href: '/customers' },
-    { title: props.customer.user.name, href: `/customers/${props.customer.id}` },
-    { title: 'Edit', href: `/customers/${props.customer.id}/edit` },
+    { title: 'Customer', href: '/dashboard/customers' },
+    { title: props.customer.user.name, href: `/dashboard/customers/${props.customer.id}` },
+    { title: 'Edit', href: `/dashboard/customers/${props.customer.id}/edit` },
 ];
 
 const form = useForm({
@@ -42,7 +42,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(`/customers/${props.customer.id}`, {
+    form.post(`/dashboard/customers/${props.customer.id}`, {
         preserveScroll: true,
     });
 };
@@ -56,7 +56,7 @@ const submit = () => {
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div class="flex items-center gap-3">
                 <Button variant="outline" size="icon" as-child>
-                    <Link :href="`/customers/${customer.id}`">
+                    <Link :href="`/dashboard/customers/${customer.id}`">
                         <ArrowLeft class="h-4 w-4" />
                     </Link>
                 </Button>
@@ -126,7 +126,7 @@ const submit = () => {
 
                     <div class="flex justify-end gap-4 pt-4">
                         <Button type="button" variant="outline" as-child>
-                            <Link :href="`/customers/${customer.id}`">Batal</Link>
+                            <Link :href="`/dashboard/customers/${customer.id}`">Batal</Link>
                         </Button>
                         <Button type="submit" :disabled="form.processing" class="gap-2">
                             <Loader2 v-if="form.processing" class="h-4 w-4 animate-spin" />

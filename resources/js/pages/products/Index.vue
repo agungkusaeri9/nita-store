@@ -68,7 +68,6 @@ interface Product {
     stock: number;
     sku: string | null;
     is_active: boolean;
-    is_virtual_try_on: boolean;
     category?: {
         name: string;
     };
@@ -101,7 +100,7 @@ const props = defineProps<Props>();
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Produk', href: '#' },
-    { title: 'Semua Produk', href: '/products' },
+    { title: 'Semua Produk', href: '/dashboard/products' },
 ];
 
 const search = ref(props.filters.search || '');
@@ -126,7 +125,7 @@ const buildQuery = () => {
 
 const fetchProducts = () => {
     isLoading.value = true;
-    router.get('/products', buildQuery(), {
+    router.get('/dashboard/products', buildQuery(), {
         preserveState: true,
         preserveScroll: true,
         onFinish: () => (isLoading.value = false),
@@ -155,7 +154,7 @@ const confirmDelete = (product: Product) => {
 
 const executeDelete = () => {
     if (productToDelete.value) {
-        router.delete(`/products/${productToDelete.value.id}`, {
+        router.delete(`/dashboard/products/${productToDelete.value.id}`, {
             onSuccess: () => {
                 isDeleteDialogOpen.value = false;
                 productToDelete.value = null;
@@ -189,7 +188,7 @@ const handleImportFile = (e: Event) => {
 };
 
 const submitImport = () => {
-    importForm.post('/products/import', {
+    importForm.post('/dashboard/products/import', {
         preserveScroll: true,
         onSuccess: () => {
             isImportModalOpen.value = false;
@@ -224,7 +223,7 @@ const submitImport = () => {
                     Import Excel
                 </Button>
                 <Button v-if="can('create products')" as-child class="gap-2">
-                    <Link href="/products/create">
+                    <Link href="/dashboard/products/create">
                         <Plus class="h-4 w-4" />
                         Tambah Produk
                     </Link>
@@ -316,11 +315,6 @@ const submitImport = () => {
                                             SKU: {{ product.sku }}
                                         </span>
                                     </div>
-                                    <div v-if="product.is_virtual_try_on" class="mt-1.5">
-                                        <Badge variant="outline" class="text-[10px] h-4 px-1.5 py-0 border-primary/20 bg-primary/5 text-primary">
-                                            Virtual Try-On
-                                        </Badge>
-                                    </div>
                                 </div>
                             </td>
                             <td class="p-4 align-middle text-left">
@@ -345,13 +339,13 @@ const submitImport = () => {
                                         </Button>
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align="end">
-                                        <Link :href="`/products/${product.id}`">
+                                        <Link :href="`/dashboard/products/${product.id}`">
                                             <DropdownMenuItem class="cursor-pointer">
                                                 <Eye class="mr-2 h-4 w-4" />
                                                 Lihat Detail
                                             </DropdownMenuItem>
                                         </Link>
-                                        <Link v-if="can('edit products')" :href="`/products/${product.id}/edit`">
+                                        <Link v-if="can('edit products')" :href="`/dashboard/products/${product.id}/edit`">
                                             <DropdownMenuItem class="cursor-pointer">
                                                 <Edit class="mr-2 h-4 w-4" />
                                                 Edit Produk
@@ -462,9 +456,9 @@ const submitImport = () => {
                 <DialogHeader>
                     <DialogTitle>Import Produk via Excel</DialogTitle>
                     <DialogDescription class="space-y-4">
-                        <p>Unggah file Excel (.xlsx) atau CSV dengan kolom: name, category, price, stock, sku, weight, description, is_virtual_try_on, is_active, variants.</p>
+                        <p>Unggah file Excel (.xlsx) atau CSV dengan kolom: name, category, price, stock, sku, weight, description, is_active, variants.</p>
                         <Button as-child variant="outline" size="sm">
-                            <a href="/products/template" download>Download Template Excel</a>
+                            <a href="/dashboard/products/template" download>Download Template Excel</a>
                         </Button>
                     </DialogDescription>
                 </DialogHeader>

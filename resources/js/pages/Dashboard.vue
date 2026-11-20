@@ -333,7 +333,7 @@ const statusChartData = computed(() => ({
                         <CardDescription>5 transaksi terakhir yang masuk.</CardDescription>
                     </div>
                     <Button variant="outline" size="sm" as-child>
-                        <Link href="/orders">Lihat Semua</Link>
+                        <Link href="/dashboard/orders">Lihat Semua</Link>
                     </Button>
                 </CardHeader>
                 <CardContent>
@@ -370,7 +370,7 @@ const statusChartData = computed(() => ({
                                     </td>
                                     <td class="p-4 align-middle text-right">
                                         <Button as-child variant="ghost" size="icon" class="h-8 w-8">
-                                            <Link :href="`/orders/${order.id}`">
+                                            <Link :href="`/dashboard/orders/${order.id}`">
                                                 <Eye class="h-4 w-4" />
                                             </Link>
                                         </Button>

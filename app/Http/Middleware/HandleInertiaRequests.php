@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Cart;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -37,6 +38,9 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $user = $request->user();
+        if ($user) {
+            $user->loadMissing('customer:id,user_id,avatar,is_active');
+        }
 
         return [
             ...parent::share($request),
@@ -47,7 +51,7 @@ class HandleInertiaRequests extends Middleware
                     'name' => $user->name,
                     'email' => $user->email,
                     'username' => $user->username,
-                    'avatar' => $user->avatar ?? null,
+                    'avatar' => $user->customer?->avatar ? $user->customer->avatar_url : null,
                     'roles' => $user->getRoleNames(),
                     'permissions' => $user->getAllPermissions()->pluck('name'),
                 ] : null,
@@ -61,6 +65,9 @@ class HandleInertiaRequests extends Middleware
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
             'pendingOrdersCount' => fn () => $user
                 ? Order::query()->where('status', 'pending')->count()
+                : 0,
+            'cartCount' => fn (): int => $user
+                ? (int) Cart::query()->where('user_id', $user->id)->sum('quantity')
                 : 0,
         ];
     }

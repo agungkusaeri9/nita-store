@@ -8,11 +8,6 @@ const page = usePage<any>();
     <img
         src="/images/logo.png"
         :alt="page.props.name || 'Logo'"
-        class="h-8 w-auto max-w-full shrink-0 object-contain"
+        class="h-20 w-full max-w-[180px] shrink-0 object-contain group-data-[collapsible=icon]:h-8 group-data-[collapsible=icon]:w-8"
     />
-    <div class="grid min-w-0 flex-1 text-left text-sm group-data-[collapsible=icon]:hidden">
-        <span class="mb-0.5 truncate leading-tight font-semibold">
-            {{ page.props.name }}
-        </span>
-    </div>
 </template>

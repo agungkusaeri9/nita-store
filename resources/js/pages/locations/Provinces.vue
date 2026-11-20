@@ -50,7 +50,7 @@ const props = defineProps<Props>();
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Lokasi (Provinsi)', href: '/locations' },
+    { title: 'Lokasi (Provinsi)', href: '/dashboard/locations' },
 ];
 
 const search = ref(props.filters.search || '');
@@ -61,7 +61,7 @@ let searchTimeout: ReturnType<typeof setTimeout>;
 
 const fetchProvinces = () => {
     isLoading.value = true;
-    router.get('/locations', {
+    router.get('/dashboard/locations', {
         search: search.value,
         per_page: perPage.value
     }, {
@@ -177,7 +177,7 @@ const clearSearch = () => {
                                 {{ province.province_name }}
                             </td>
                             <td class="p-4 align-middle text-right">
-                                <Link :href="`/locations/provinces/${province.province_id}/cities`">
+                                <Link :href="`/dashboard/locations/provinces/${province.province_id}/cities`">
                                     <Button variant="outline" size="sm" class="h-8 gap-1">
                                         <Eye class="h-3.5 w-3.5" />
                                         <span class="sr-only sm:not-sr-only">Lihat Kota</span>

@@ -69,7 +69,7 @@ const props = defineProps<Props>();
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Peran & Hak Akses', href: '#' },
-    { title: 'Manajemen Peran', href: '/roles' },
+    { title: 'Manajemen Peran', href: '/dashboard/roles' },
 ];
 
 const filterState = reactive({
@@ -80,7 +80,7 @@ const filterState = reactive({
 // Search functionality
 const debouncedSearch = useDebounceFn(() => {
     router.get(
-        '/roles',
+        '/dashboard/roles',
         { ...filterState },
         { preserveState: true, replace: true },
     );
@@ -108,7 +108,7 @@ const confirmDelete = (role: Role) => {
 
 const executeDelete = () => {
     if (roleToDelete.value) {
-        router.delete(`/roles/${roleToDelete.value.id}`, {
+        router.delete(`/dashboard/roles/${roleToDelete.value.id}`, {
             onSuccess: () => {
                 isDeleteDialogOpen.value = false;
                 roleToDelete.value = null;
@@ -141,7 +141,7 @@ const perPageOptions = ['10', '20', '30', '40', '50', '100'];
             </div>
 
             <Button v-if="can('create roles')" as-child class="shrink-0">
-                <Link href="/roles/create">
+                <Link href="/dashboard/roles/create">
                     <Plus class="mr-2 h-4 w-4" />
                     Tambah Peran
                 </Link>
@@ -276,7 +276,7 @@ const perPageOptions = ['10', '20', '30', '40', '50', '100'];
                                         :disabled="role.name === 'super admin'"
                                         title="Edit Peran"
                                     >
-                                        <Link :href="`/roles/${role.id}/edit`">
+                                        <Link :href="`/dashboard/roles/${role.id}/edit`">
                                             <Edit class="h-4 w-4" />
                                         </Link>
                                     </Button>

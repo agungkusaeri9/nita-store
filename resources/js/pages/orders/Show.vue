@@ -32,8 +32,8 @@ const { can } = usePermissions();
 
 const breadcrumbs = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Pesanan', href: '/orders' },
-    { title: props.order.order_number, href: `/orders/${props.order.id}` },
+    { title: 'Pesanan', href: '/dashboard/orders' },
+    { title: props.order.order_number, href: `/dashboard/orders/${props.order.id}` },
 ];
 
 const formatCurrency = (amount: number | string) => {
@@ -80,7 +80,7 @@ const form = useForm({
 
 const updateStatus = (newStatus: string) => {
     form.status = newStatus;
-    form.post(`/orders/${props.order.id}/status`, {
+    form.post(`/dashboard/orders/${props.order.id}/status`, {
         preserveScroll: true
     });
 };
@@ -91,7 +91,7 @@ const paymentForm = useForm({
 
 const updatePaymentStatus = (newStatus: string) => {
     paymentForm.payment_status = newStatus;
-    paymentForm.post(`/orders/${props.order.id}/payment`, {
+    paymentForm.post(`/dashboard/orders/${props.order.id}/payment`, {
         preserveScroll: true
     });
 };
@@ -113,7 +113,7 @@ const copyResi = () => {
 };
 
 const updateShipping = () => {
-    shippingForm.post(`/orders/${props.order.id}/shipping`, {
+    shippingForm.post(`/dashboard/orders/${props.order.id}/shipping`, {
         preserveScroll: true
     });
 };
@@ -137,7 +137,7 @@ watch(() => props.order, (newOrder) => {
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div class="flex items-center gap-3">
                     <Button as-child variant="outline" size="icon" class="h-8 w-8">
-                        <Link href="/orders"><ChevronLeft class="h-4 w-4" /></Link>
+                        <Link href="/dashboard/orders"><ChevronLeft class="h-4 w-4" /></Link>
                     </Button>
                     <div>
                         <h1 class="text-2xl font-bold tracking-tight text-foreground flex items-center gap-2">

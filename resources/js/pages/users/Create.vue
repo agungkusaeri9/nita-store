@@ -25,8 +25,8 @@ defineProps<{
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Pengguna', href: '/users' },
-    { title: 'Tambah Pengguna', href: '/users/create' },
+    { title: 'Pengguna', href: '/dashboard/users' },
+    { title: 'Tambah Pengguna', href: '/dashboard/users/create' },
 ];
 
 const form = useForm({
@@ -47,7 +47,7 @@ const toggleRole = (name: string, checked: boolean | 'indeterminate') => {
 };
 
 const submit = () => {
-    form.post('/users');
+    form.post('/dashboard/users');
 };
 </script>
 
@@ -172,7 +172,7 @@ const submit = () => {
 
                     <div class="flex justify-end gap-4">
                         <Button type="button" variant="outline" as-child>
-                            <Link href="/users">Batal</Link>
+                            <Link href="/dashboard/users">Batal</Link>
                         </Button>
                         <Button type="submit" :disabled="form.processing">
                             {{

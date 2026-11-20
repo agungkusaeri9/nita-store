@@ -64,7 +64,7 @@ const props = defineProps<{
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Pesanan', href: '/orders' },
+    { title: 'Pesanan', href: '/dashboard/orders' },
 ];
 
 const search = ref(props.filters.search || '');
@@ -76,7 +76,7 @@ const perPageOptions = ['10', '25', '50', '100'];
 
 const applyFilters = () => {
     router.get(
-        '/orders',
+        '/dashboard/orders',
         {
             search: search.value,
             status: status.value,
@@ -307,7 +307,7 @@ watch(perPage, () => {
                                 </td>
                                 <td class="p-4 align-middle text-right">
                                     <Button as-child variant="ghost" size="icon" class="h-8 w-8">
-                                        <Link :href="`/orders/${order.id}`">
+                                        <Link :href="`/dashboard/orders/${order.id}`">
                                             <Eye class="h-4 w-4" />
                                         </Link>
                                     </Button>

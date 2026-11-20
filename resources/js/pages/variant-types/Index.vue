@@ -72,7 +72,7 @@ const props = defineProps<Props>();
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Produk', href: '#' },
-    { title: 'Varian Produk', href: '/variant-types' },
+    { title: 'Varian Produk', href: '/dashboard/variant-types' },
 ];
 
 const filterState = reactive({
@@ -87,7 +87,7 @@ const buildQuery = () => ({
 });
 
 const debouncedSearch = useDebounceFn(() => {
-    router.get('/variant-types', buildQuery(), { preserveState: true, replace: true });
+    router.get('/dashboard/variant-types', buildQuery(), { preserveState: true, replace: true });
 }, 300);
 
 import { watch } from 'vue';
@@ -106,7 +106,7 @@ const confirmDelete = (vt: VariantType) => {
 
 const executeDelete = () => {
     if (variantToDelete.value) {
-        router.delete(`/variant-types/${variantToDelete.value.id}`, {
+        router.delete(`/dashboard/variant-types/${variantToDelete.value.id}`, {
             onSuccess: () => {
                 isDeleteDialogOpen.value = false;
                 variantToDelete.value = null;
@@ -145,7 +145,7 @@ const formatDate = (dateStr: string) => {
             </div>
 
             <Button as-child class="shrink-0">
-                <Link href="/variant-types/create">
+                <Link href="/dashboard/variant-types/create">
                     <Plus class="mr-2 h-4 w-4" />
                     Tambah Varian
                 </Link>
@@ -244,7 +244,7 @@ const formatDate = (dateStr: string) => {
                             </td>
                             <td class="px-4 py-3 text-center">
                                 <Link
-                                    :href="`/variant-types/${vt.id}/values`"
+                                    :href="`/dashboard/variant-types/${vt.id}/values`"
                                     class="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:underline"
                                 >
                                     <ListOrdered class="h-3.5 w-3.5" />
@@ -259,12 +259,12 @@ const formatDate = (dateStr: string) => {
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center justify-center gap-1.5">
-                                    <Link :href="`/variant-types/${vt.id}/values`">
+                                    <Link :href="`/dashboard/variant-types/${vt.id}/values`">
                                         <Button variant="ghost" size="icon" class="h-7 w-7" title="Kelola Nilai">
                                             <Settings2 class="h-3.5 w-3.5" />
                                         </Button>
                                     </Link>
-                                    <Link :href="`/variant-types/${vt.id}/edit`">
+                                    <Link :href="`/dashboard/variant-types/${vt.id}/edit`">
                                         <Button variant="ghost" size="icon" class="h-7 w-7" title="Edit">
                                             <Pencil class="h-3.5 w-3.5" />
                                         </Button>

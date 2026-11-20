@@ -7,8 +7,6 @@ use App\Http\Requests\AppConfig\StoreAppConfigRequest;
 use App\Http\Requests\AppConfig\UpdateAppConfigRequest;
 use App\Models\AppConfig;
 use App\Services\AppConfigService;
-use App\Services\FashnAiService;
-use App\Services\GeoapifyService;
 use App\Services\RajaOngkirService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -151,65 +149,6 @@ class AppConfigController extends Controller
         $rajaOngkir->getApiKey();
 
         return redirect()->back()->with('success', 'Konfigurasi RajaOngkir berhasil diperbarui.');
-    }
-
-    /**
-     * Show Fashn AI configuration page (API credentials only).
-     */
-    public function fashnAi(): Response
-    {
-        $config = AppConfig::firstOrCreate(
-            ['key' => 'fashn_api_key'],
-            [
-                'value' => null,
-                'description' => 'API Key untuk layanan integrasi Fashn AI',
-            ]
-        );
-
-        $baseUrlConfig = AppConfig::firstOrCreate(
-            ['key' => 'fashn_api_base_url'],
-            [
-                'value' => 'https://api.fashn.ai',
-                'description' => 'Base URL endpoint API untuk layanan Fashn AI',
-            ]
-        );
-
-        return Inertia::render('configurations/FashnAi', [
-            'config' => $config,
-            'baseUrlConfig' => $baseUrlConfig,
-        ]);
-    }
-
-    /**
-     * Update Fashn AI configuration (API credentials only).
-     */
-    public function updateFashnAi(Request $request): RedirectResponse
-    {
-        $validated = $request->validate([
-            'api_key' => ['nullable', 'string', 'max:500'],
-            'base_url' => ['nullable', 'url', 'max:500'],
-            'description' => ['nullable', 'string', 'max:1000'],
-        ]);
-
-        $this->appConfigService->setOrUpdate(
-            'fashn_api_key',
-            $validated['api_key'] ?? null,
-            $validated['description'] ?? 'API Key untuk layanan integrasi Fashn AI'
-        );
-
-        $this->appConfigService->setOrUpdate(
-            'fashn_api_base_url',
-            ! empty($validated['base_url']) ? rtrim($validated['base_url'], '/') : 'https://api.fashn.ai',
-            'Base URL endpoint API untuk layanan Fashn AI'
-        );
-
-        // Clear and pre-warm Fashn AI cache
-        $fashnService = app(FashnAiService::class);
-        $fashnService->clearCache();
-        $fashnService->getBaseUrl();
-        $fashnService->getApiKey();
-
-        return redirect()->back()->with('success', 'Kredensial API Fashn AI berhasil diperbarui.');
     }
 
     /**

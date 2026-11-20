@@ -50,7 +50,6 @@ class DatabaseSeeder extends Seeder
             // AppVersionSeeder::class,
             AppConfigSeeder::class,
             UserCartSeeder::class,
-            // VirtualTryOnSeeder::class,
         ]);
     }
 }

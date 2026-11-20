@@ -96,7 +96,7 @@ const props = defineProps<Props>();
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Notifikasi', href: '/notifications' },
+    { title: 'Notifikasi', href: '/dashboard/notifications' },
     { title: 'Detail Notifikasi', href: '#' },
 ];
 
@@ -127,7 +127,7 @@ const filteredRecipients = computed(() => {
 const isDeleteDialogOpen = ref(false);
 
 const executeDelete = () => {
-    router.delete(`/notifications/${props.notification.id}`, {
+    router.delete(`/dashboard/notifications/${props.notification.id}`, {
         onSuccess: () => {
             isDeleteDialogOpen.value = false;
         },
@@ -135,7 +135,7 @@ const executeDelete = () => {
 };
 
 const markAllAsRead = () => {
-    router.post(`/notifications/${props.notification.id}/mark-all-read`, {}, {
+    router.post(`/dashboard/notifications/${props.notification.id}/mark-all-read`, {}, {
         preserveScroll: true,
     });
 };
@@ -187,7 +187,7 @@ const readPercentage = computed(() => {
             <div class="space-y-1">
                 <div class="flex items-center gap-3">
                     <Button as-child variant="outline" size="icon" class="h-9 w-9">
-                        <Link href="/notifications">
+                        <Link href="/dashboard/notifications">
                             <ChevronLeft class="h-4 w-4" />
                         </Link>
                     </Button>

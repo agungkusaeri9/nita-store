@@ -59,8 +59,8 @@ const props = defineProps<Props>();
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Lokasi (Provinsi)', href: '/locations' },
-    { title: `Kota ${props.city.city_name}`, href: `/locations/provinces/${props.city.province_id}/cities` },
+    { title: 'Lokasi (Provinsi)', href: '/dashboard/locations' },
+    { title: `Kota ${props.city.city_name}`, href: `/dashboard/locations/provinces/${props.city.province_id}/cities` },
     { title: 'Kecamatan', href: '#' },
 ];
 
@@ -72,7 +72,7 @@ let searchTimeout: ReturnType<typeof setTimeout>;
 
 const fetchSubdistricts = () => {
     isLoading.value = true;
-    router.get(`/locations/cities/${props.city.city_id}/subdistricts`, {
+    router.get(`/dashboard/locations/cities/${props.city.city_id}/subdistricts`, {
         search: search.value,
         per_page: perPage.value
     }, {
@@ -109,7 +109,7 @@ const clearSearch = () => {
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div class="space-y-1">
                 <div class="flex items-center gap-3">
-                    <Link :href="`/locations/provinces/${city.province_id}/cities`">
+                    <Link :href="`/dashboard/locations/provinces/${city.province_id}/cities`">
                         <Button variant="ghost" size="icon" class="h-8 w-8 rounded-full">
                             <ArrowLeft class="h-4 w-4" />
                         </Button>

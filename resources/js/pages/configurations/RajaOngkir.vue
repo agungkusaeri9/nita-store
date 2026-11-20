@@ -51,7 +51,7 @@ const props = defineProps<Props>();
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Konfigurasi', href: '#' },
-    { title: 'RajaOngkir', href: '/configurations/rajaongkir' },
+    { title: 'RajaOngkir', href: '/dashboard/configurations/rajaongkir' },
 ];
 
 const showKey = ref(false);
@@ -64,7 +64,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post('/configurations/rajaongkir', {
+    form.post('/dashboard/configurations/rajaongkir', {
         preserveScroll: true,
     });
 };
@@ -290,7 +290,7 @@ const copyKey = async (text: string) => {
                     </CardHeader>
                     <CardContent class="space-y-2 text-xs">
                         <Link
-                            href="/couriers"
+                            href="/dashboard/couriers"
                             class="flex items-center justify-between rounded-md border p-2.5 transition-colors hover:bg-muted"
                         >
                             <span class="flex items-center gap-2 font-medium">
@@ -300,7 +300,7 @@ const copyKey = async (text: string) => {
                             <ExternalLink class="h-3.5 w-3.5 text-muted-foreground" />
                         </Link>
                         <Link
-                            href="/configurations"
+                            href="/dashboard/configurations"
                             class="flex items-center justify-between rounded-md border p-2.5 transition-colors hover:bg-muted"
                         >
                             <span class="flex items-center gap-2 font-medium">

@@ -38,8 +38,8 @@ const props = defineProps<{
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Customer', href: '/customers' },
-    { title: props.customer.user.name, href: `/customers/${props.customer.id}` },
+    { title: 'Customer', href: '/dashboard/customers' },
+    { title: props.customer.user.name, href: `/dashboard/customers/${props.customer.id}` },
 ];
 </script>
 
@@ -51,14 +51,14 @@ const breadcrumbs: BreadcrumbItem[] = [
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div class="flex items-center gap-3">
                 <Button variant="outline" size="icon" as-child>
-                    <Link href="/customers">
+                    <Link href="/dashboard/customers">
                         <ArrowLeft class="h-4 w-4" />
                     </Link>
                 </Button>
                 <h1 class="text-2xl font-bold tracking-tight">Detail Customer</h1>
             </div>
             <Button as-child class="gap-2">
-                <Link :href="`/customers/${customer.id}/edit`">
+                <Link :href="`/dashboard/customers/${customer.id}/edit`">
                     <Edit class="h-4 w-4" /> Edit Customer
                 </Link>
             </Button>

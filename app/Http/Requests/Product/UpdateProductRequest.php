@@ -27,7 +27,6 @@ class UpdateProductRequest extends FormRequest
             'weight' => ['required', 'integer', 'min:0'],
 
             // Flags
-            'is_virtual_try_on' => ['boolean'],
             'is_active' => ['boolean'],
 
             // Relations

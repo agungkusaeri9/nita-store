@@ -33,7 +33,7 @@ const props = defineProps<Props>();
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Produk', href: '#' },
-    { title: 'Varian Produk', href: '/variant-types' },
+    { title: 'Varian Produk', href: '/dashboard/variant-types' },
     { title: 'Edit Varian', href: '#' },
 ];
 
@@ -46,7 +46,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.put(`/variant-types/${props.variantType.id}`);
+    form.put(`/dashboard/variant-types/${props.variantType.id}`);
 };
 </script>
 
@@ -145,7 +145,7 @@ const submit = () => {
                 <Card class="border-primary/20 bg-primary/5">
                     <CardContent class="pt-4 pb-4">
                         <p class="text-sm text-muted-foreground mb-3">Kelola nilai/opsi untuk varian ini</p>
-                        <Link :href="`/variant-types/${variantType.id}/values`">
+                        <Link :href="`/dashboard/variant-types/${variantType.id}/values`">
                             <Button type="button" variant="outline" class="w-full gap-2">
                                 <Layers class="h-4 w-4" />
                                 Kelola Nilai Varian
@@ -160,7 +160,7 @@ const submit = () => {
                         <Layers v-else class="h-4 w-4" />
                         Perbarui Varian
                     </Button>
-                    <Link href="/variant-types">
+                    <Link href="/dashboard/variant-types">
                         <Button type="button" variant="outline" class="w-full">Batal</Button>
                     </Link>
                 </div>

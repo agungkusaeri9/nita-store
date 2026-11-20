@@ -70,7 +70,7 @@ const props = defineProps<Props>();
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Log Aktivitas', href: '/activity' },
+    { title: 'Log Aktivitas', href: '/dashboard/activity' },
 ];
 
 const filterState = reactive({
@@ -87,7 +87,7 @@ const applyFilters = useDebounceFn(() => {
     const params: any = { ...filterState };
     if (params.user_id === 'all') delete params.user_id;
 
-    router.get('/activity', params, {
+    router.get('/dashboard/activity', params, {
         preserveState: true,
         replace: true,
     });

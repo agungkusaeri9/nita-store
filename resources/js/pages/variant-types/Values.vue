@@ -31,7 +31,7 @@ const props = defineProps<Props>();
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Produk', href: '#' },
-    { title: 'Varian Produk', href: '/variant-types' },
+    { title: 'Varian Produk', href: '/dashboard/variant-types' },
     { title: 'Nilai Varian', href: '#' },
 ];
 
@@ -68,7 +68,7 @@ const updateValue = (index: number, val: string) => {
 
 const save = () => {
     form.values = [...localValues.value];
-    form.post(`/variant-types/${props.variantType.id}/values`);
+    form.post(`/dashboard/variant-types/${props.variantType.id}/values`);
 };
 
 const isDirty = ref(false);
@@ -98,7 +98,7 @@ const isDirty = ref(false);
             </div>
 
             <Button as-child variant="outline" class="shrink-0 gap-2">
-                <Link href="/variant-types">
+                <Link href="/dashboard/variant-types">
                     <ArrowLeft class="h-4 w-4" />
                     Kembali
                 </Link>
@@ -203,7 +203,7 @@ const isDirty = ref(false);
                     Simpan Nilai Varian
                 </Button>
 
-                <Link :href="`/variant-types/${variantType.id}/edit`">
+                <Link :href="`/dashboard/variant-types/${variantType.id}/edit`">
                     <Button variant="outline" class="w-full gap-2">
                         <Layers class="h-4 w-4" />
                         Edit Informasi Varian

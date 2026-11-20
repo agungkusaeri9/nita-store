@@ -19,8 +19,8 @@ import type { BreadcrumbItem } from '@/types';
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Produk', href: '#' },
-    { title: 'Kategori Produk', href: '/categories' },
-    { title: 'Tambah Kategori', href: '/categories/create' },
+    { title: 'Kategori Produk', href: '/dashboard/categories' },
+    { title: 'Tambah Kategori', href: '/dashboard/categories/create' },
 ];
 
 const form = useForm({
@@ -60,7 +60,7 @@ const removeImage = () => {
 };
 
 const submit = () => {
-    form.post('/categories');
+    form.post('/dashboard/categories');
 };
 </script>
 
@@ -244,7 +244,7 @@ const submit = () => {
                     <!-- Action Buttons -->
                     <div class="flex justify-end gap-4 border-t pt-4">
                         <Button type="button" variant="outline" as-child>
-                            <Link href="/categories">Batal</Link>
+                            <Link href="/dashboard/categories">Batal</Link>
                         </Button>
                         <Button type="submit" :disabled="form.processing">
                             {{

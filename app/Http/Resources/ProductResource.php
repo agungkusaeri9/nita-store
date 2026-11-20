@@ -47,7 +47,6 @@ class ProductResource extends JsonResource
             'sku' => $this->sku,
             'weight' => (int) $this->weight,
             'sold_count' => $soldCount,
-            'is_virtual_try_on' => (bool) $this->is_virtual_try_on,
             'is_active' => (bool) $this->is_active,
             'primary_image_url' => $this->primary_image_url,
             'category' => CategoryResource::make($this->whenLoaded('category')),

@@ -17,7 +17,6 @@ class ProductTemplateExport implements FromArray, WithHeadings
             'sku',
             'weight',
             'description',
-            'is_virtual_try_on',
             'is_active',
             'variants',
         ];
@@ -34,7 +33,6 @@ class ProductTemplateExport implements FromArray, WithHeadings
                 'B001', // sku
                 200, // weight
                 'Kemeja halus premium', // description
-                1, // is_virtual_try_on
                 1, // is_active
                 'Warna:Merah,Biru;Ukuran:M,L,XL', // variants
             ],
@@ -46,7 +44,6 @@ class ProductTemplateExport implements FromArray, WithHeadings
                 'K002',
                 500,
                 'Kain premium untuk seragam',
-                0,
                 1,
                 'Tipe:Katun,Sutra',
             ],

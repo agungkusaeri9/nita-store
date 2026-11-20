@@ -53,7 +53,7 @@ const props = defineProps<{
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Peran & Hak Akses', href: '#' },
-    { title: 'Manajemen Peran', href: '/roles' },
+    { title: 'Manajemen Peran', href: '/dashboard/roles' },
     { title: `Edit Peran: ${props.role.name}`, href: '#' },
 ];
 
@@ -275,7 +275,7 @@ const isModulePartiallySelected = (modulePermissions: Permission[]) => {
 };
 
 const submit = () => {
-    form.patch(`/roles/${props.role.id}`);
+    form.patch(`/dashboard/roles/${props.role.id}`);
 };
 </script>
 
@@ -471,7 +471,7 @@ const submit = () => {
 
             <div class="flex items-center justify-end gap-3 pb-8">
                 <Button type="button" variant="outline" as-child>
-                    <Link href="/roles">Batal</Link>
+                    <Link href="/dashboard/roles">Batal</Link>
                 </Button>
                 <Button type="submit" :disabled="form.processing">
                     <Shield class="mr-2 h-4 w-4" />

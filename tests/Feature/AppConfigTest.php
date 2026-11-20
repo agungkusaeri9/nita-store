@@ -20,9 +20,6 @@ class AppConfigTest extends TestCase
         $response = $this->get(route('configurations.rajaongkir'));
         $response->assertRedirect(route('login'));
 
-        $response = $this->get(route('configurations.fashn-ai'));
-        $response->assertRedirect(route('login'));
-
         $response = $this->get(route('configurations.geoapify'));
         $response->assertRedirect(route('login'));
     }
@@ -166,38 +163,6 @@ class AppConfigTest extends TestCase
         $this->assertSame('ro_api_key_sample_12345', AppConfig::getValue('rajaongkir_api_key'));
     }
 
-    public function test_authenticated_users_can_view_fashn_ai_page(): void
-    {
-        $user = User::factory()->create();
-
-        $response = $this->actingAs($user)->get(route('configurations.fashn-ai'));
-
-        $response->assertOk();
-        $response->assertInertia(fn ($page) => $page
-            ->component('configurations/FashnAi')
-            ->has('config')
-            ->where('config.key', 'fashn_api_key')
-        );
-    }
-
-    public function test_authenticated_users_can_update_fashn_ai_config(): void
-    {
-        $user = User::factory()->create();
-
-        $response = $this->actingAs($user)->post(route('configurations.fashn-ai.update'), [
-            'api_key' => 'fa_sample_token_xyz987',
-            'description' => 'Fashn AI Token Baru',
-        ]);
-
-        $response->assertSessionHas('success');
-        $this->assertDatabaseHas('app_configs', [
-            'key' => 'fashn_api_key',
-            'value' => 'fa_sample_token_xyz987',
-            'description' => 'Fashn AI Token Baru',
-        ]);
-        $this->assertSame('fa_sample_token_xyz987', AppConfig::getValue('fashn_api_key'));
-    }
-
     public function test_authenticated_users_can_view_geoapify_page(): void
     {
         $user = User::factory()->create();
@@ -230,17 +195,12 @@ class AppConfigTest extends TestCase
         $this->assertSame('geo_sample_key_998877', AppConfig::getValue('geoapify_api_key'));
     }
 
-    public function test_app_config_seeder_seeds_rajaongkir_and_fashn_ai_keys(): void
+    public function test_app_config_seeder_seeds_rajaongkir_and_geoapify_keys(): void
     {
         $this->seed(AppConfigSeeder::class);
 
         $this->assertDatabaseHas('app_configs', [
             'key' => 'rajaongkir_api_key',
-            'value' => null,
-        ]);
-
-        $this->assertDatabaseHas('app_configs', [
-            'key' => 'fashn_api_key',
             'value' => null,
         ]);
 

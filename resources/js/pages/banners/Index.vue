@@ -94,7 +94,7 @@ const props = defineProps<Props>();
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Banner Promosi (Mobile)', href: '/banners' },
+    { title: 'Banner Promosi (Mobile)', href: '/dashboard/banners' },
 ];
 
 const filterState = reactive({
@@ -113,7 +113,7 @@ const buildQuery = () => ({
 });
 
 const debouncedSearch = useDebounceFn(() => {
-    router.get('/banners', buildQuery(), {
+    router.get('/dashboard/banners', buildQuery(), {
         preserveState: true,
         replace: true,
     });
@@ -141,7 +141,7 @@ const confirmDelete = (banner: Banner) => {
 
 const executeDelete = () => {
     if (bannerToDelete.value) {
-        router.delete(`/banners/${bannerToDelete.value.id}`, {
+        router.delete(`/dashboard/banners/${bannerToDelete.value.id}`, {
             preserveScroll: true,
             onSuccess: () => {
                 isDeleteDialogOpen.value = false;
@@ -154,7 +154,7 @@ const executeDelete = () => {
 const toggleBanner = (banner: Banner) => {
     togglingBannerId.value = banner.id;
     router.post(
-        `/banners/${banner.id}/toggle`,
+        `/dashboard/banners/${banner.id}/toggle`,
         {},
         {
             preserveScroll: true,
@@ -204,7 +204,7 @@ const perPageOptions = ['10', '20', '30', '50'];
             </div>
 
             <Button as-child class="shrink-0">
-                <Link href="/banners/create">
+                <Link href="/dashboard/banners/create">
                     <Plus class="mr-2 h-4 w-4" />
                     Tambah Banner
                 </Link>
@@ -437,7 +437,7 @@ const perPageOptions = ['10', '20', '30', '50'];
                                         as-child
                                         title="Edit Banner"
                                     >
-                                        <Link :href="`/banners/${banner.id}/edit`">
+                                        <Link :href="`/dashboard/banners/${banner.id}/edit`">
                                             <Edit class="h-4 w-4" />
                                         </Link>
                                     </Button>

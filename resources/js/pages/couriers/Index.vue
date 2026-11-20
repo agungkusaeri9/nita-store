@@ -89,7 +89,7 @@ const props = defineProps<Props>();
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Kurir', href: '/couriers' },
+    { title: 'Kurir', href: '/dashboard/couriers' },
 ];
 
 const search = ref(props.filters.search || '');
@@ -101,7 +101,7 @@ let searchTimeout: ReturnType<typeof setTimeout>;
 
 const fetchcouriers = () => {
     isLoading.value = true;
-    router.get('/couriers', {
+    router.get('/dashboard/couriers', {
         search: search.value,
         status: status.value,
         per_page: perPage.value
@@ -187,7 +187,7 @@ const openEditModal = (method: Courier) => {
 
 const submitForm = () => {
     if (isEditing.value && currentId.value) {
-        form.post(`/couriers/${currentId.value}`, {
+        form.post(`/dashboard/couriers/${currentId.value}`, {
             preserveScroll: true,
             onSuccess: () => {
                 form.reset();
@@ -195,7 +195,7 @@ const submitForm = () => {
             },
         });
     } else {
-        form.post('/couriers', {
+        form.post('/dashboard/couriers', {
             preserveScroll: true,
             onSuccess: () => {
                 form.reset();
@@ -216,7 +216,7 @@ const confirmDelete = (method: Courier) => {
 
 const executeDelete = () => {
     if (itemToDelete.value) {
-        router.delete(`/couriers/${itemToDelete.value.id}`, {
+        router.delete(`/dashboard/couriers/${itemToDelete.value.id}`, {
             onSuccess: () => {
                 isDeleteDialogOpen.value = false;
                 itemToDelete.value = null;

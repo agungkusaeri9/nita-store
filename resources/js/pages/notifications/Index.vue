@@ -135,7 +135,7 @@ const props = defineProps<Props>();
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Notifikasi', href: '#' },
-    { title: 'Daftar Notifikasi', href: '/notifications' },
+    { title: 'Daftar Notifikasi', href: '/dashboard/notifications' },
 ];
 
 const search = ref(props.filters.search || '');
@@ -160,7 +160,7 @@ const buildQuery = () => {
 
 const fetchNotifications = () => {
     isLoading.value = true;
-    router.get('/notifications', buildQuery(), {
+    router.get('/dashboard/notifications', buildQuery(), {
         preserveState: true,
         preserveScroll: true,
         onFinish: () => (isLoading.value = false),
@@ -189,7 +189,7 @@ const confirmDelete = (item: NotificationItem) => {
 
 const executeDelete = () => {
     if (notificationToDelete.value) {
-        router.delete(`/notifications/${notificationToDelete.value.id}`, {
+        router.delete(`/dashboard/notifications/${notificationToDelete.value.id}`, {
             onSuccess: () => {
                 isDeleteDialogOpen.value = false;
                 notificationToDelete.value = null;
@@ -200,7 +200,7 @@ const executeDelete = () => {
 
 // Mark All As Read
 const markAllAsRead = (notification: NotificationItem) => {
-    router.post(`/notifications/${notification.id}/mark-all-read`, {}, {
+    router.post(`/dashboard/notifications/${notification.id}/mark-all-read`, {}, {
         preserveScroll: true,
     });
 };
@@ -272,13 +272,13 @@ const calculateReadPercentage = (read: number = 0, total: number = 0) => {
 
             <div class="flex shrink-0 items-center gap-2">
                 <Button as-child variant="outline" class="gap-2">
-                    <Link href="/notification-settings">
+                    <Link href="/dashboard/notification-settings">
                         <Settings class="h-4 w-4" />
                         Template & Pengaturan
                     </Link>
                 </Button>
                 <Button as-child class="gap-2 shadow-xs">
-                    <Link href="/notifications/create">
+                    <Link href="/dashboard/notifications/create">
                         <Plus class="h-4 w-4" />
                         Kirim Notifikasi
                     </Link>
@@ -477,7 +477,7 @@ const calculateReadPercentage = (read: number = 0, total: number = 0) => {
                                         </Button>
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align="end" class="w-48">
-                                        <Link :href="`/notifications/${item.id}`">
+                                        <Link :href="`/dashboard/notifications/${item.id}`">
                                             <DropdownMenuItem class="cursor-pointer">
                                                 <Eye class="mr-2 h-4 w-4" />
                                                 Lihat Penerima

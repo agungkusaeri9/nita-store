@@ -109,7 +109,7 @@ const props = defineProps<Props>();
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Pengaturan', href: '#' },
-    { title: 'Manajemen Aplikasi', href: '/app-versions' },
+    { title: 'Manajemen Aplikasi', href: '/dashboard/app-versions' },
 ];
 
 const search = ref(props.filters.search || '');
@@ -123,7 +123,7 @@ watch([search, typeFilter, statusFilter, perPage], () => {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
         router.get(
-            '/app-versions',
+            '/dashboard/app-versions',
             {
                 search: search.value,
                 type: typeFilter.value,
@@ -261,7 +261,7 @@ fileInput.value.value = '';
 
 const submitForm = () => {
     if (editingItem.value) {
-        form.post(`/app-versions/${editingItem.value.id}`, {
+        form.post(`/dashboard/app-versions/${editingItem.value.id}`, {
             preserveScroll: true,
             forceFormData: true,
             onSuccess: () => {
@@ -271,7 +271,7 @@ const submitForm = () => {
             },
         });
     } else {
-        form.post('/app-versions', {
+        form.post('/dashboard/app-versions', {
             preserveScroll: true,
             forceFormData: true,
             onSuccess: () => {
@@ -284,15 +284,15 @@ const submitForm = () => {
 };
 
 const toggleActive = (item: AppVersionItem) => {
-    router.post(`/app-versions/${item.id}/toggle`, {}, { preserveScroll: true });
+    router.post(`/dashboard/app-versions/${item.id}/toggle`, {}, { preserveScroll: true });
 };
 
 const setAsLatest = (item: AppVersionItem) => {
-    router.post(`/app-versions/${item.id}/set-latest`, {}, { preserveScroll: true });
+    router.post(`/dashboard/app-versions/${item.id}/set-latest`, {}, { preserveScroll: true });
 };
 
 const toggleForceUpdate = (item: AppVersionItem) => {
-    router.post(`/app-versions/${item.id}/toggle-force-update`, {}, { preserveScroll: true });
+    router.post(`/dashboard/app-versions/${item.id}/toggle-force-update`, {}, { preserveScroll: true });
 };
 
 const isDeleteDialogOpen = ref(false);
@@ -305,7 +305,7 @@ const confirmDelete = (item: AppVersionItem) => {
 
 const executeDelete = () => {
     if (itemToDelete.value) {
-        router.delete(`/app-versions/${itemToDelete.value.id}`, {
+        router.delete(`/dashboard/app-versions/${itemToDelete.value.id}`, {
             preserveScroll: true,
             onSuccess: () => {
                 isDeleteDialogOpen.value = false;
@@ -474,7 +474,7 @@ const executeDelete = () => {
                                     <div class="flex items-center gap-2 text-xs text-muted-foreground">
                                         <span>{{ formatFileSize(item.file_size) }}</span>
                                         <a
-                                            :href="`/app-versions/${item.id}/download`"
+                                            :href="`/dashboard/app-versions/${item.id}/download`"
                                             class="inline-flex items-center gap-1 text-primary hover:underline font-medium"
                                         >
                                             <Download class="h-3 w-3" />
@@ -541,7 +541,7 @@ const executeDelete = () => {
                                             v-if="item.file_path"
                                             as-child
                                         >
-                                            <a :href="`/app-versions/${item.id}/download`" class="cursor-pointer flex items-center">
+                                            <a :href="`/dashboard/app-versions/${item.id}/download`" class="cursor-pointer flex items-center">
                                                 <Download class="mr-2 h-4 w-4" />
                                                 Unduh File
                                             </a>

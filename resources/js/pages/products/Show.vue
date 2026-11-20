@@ -26,7 +26,6 @@ import {
     Loader2,
     MessageSquare,
     PackageCheck,
-    ScanFace,
     ShoppingBag,
     Star,
 } from 'lucide-vue-next';
@@ -53,7 +52,6 @@ interface Product {
     stock: number;
     sku: string | null;
     weight: number;
-    is_virtual_try_on: boolean;
     is_active: boolean;
     created_at: string;
     category?: {
@@ -136,7 +134,7 @@ const togglingReviewId = ref<number | null>(null);
 
 const breadcrumbs = computed<BreadcrumbItem[]>(() => [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Produk', href: '/products' },
+    { title: 'Produk', href: '/dashboard/products' },
     { title: props.product.name, href: '#' },
 ]);
 
@@ -222,7 +220,7 @@ const handlePageChange = (page: number) => {
 const toggleVisibility = (review: ProductReviewItem) => {
     togglingReviewId.value = review.id;
     router.post(
-        `/reviews/${review.id}/toggle`,
+        `/dashboard/reviews/${review.id}/toggle`,
         {},
         {
             preserveScroll: true,
@@ -280,13 +278,13 @@ const toggleVisibility = (review: ProductReviewItem) => {
 
             <div class="flex shrink-0 items-center gap-2">
                 <Button variant="outline" as-child class="bg-background">
-                    <Link href="/products">
+                    <Link href="/dashboard/products">
                         <ArrowLeft class="mr-2 h-4 w-4" />
                         Kembali
                     </Link>
                 </Button>
                 <Button as-child>
-                    <Link :href="`/products/${product.id}/edit`">
+                    <Link :href="`/dashboard/products/${product.id}/edit`">
                         <Edit class="mr-2 h-4 w-4" />
                         Edit Produk
                     </Link>
@@ -310,7 +308,7 @@ const toggleVisibility = (review: ProductReviewItem) => {
             <!-- TAB 1: OVERVIEW -->
             <TabsContent value="overview" class="space-y-6">
                 <!-- Metrics -->
-                <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+                <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     <Card class="bg-background">
                         <CardContent class="p-5">
                             <div class="flex items-center gap-2 text-sm font-medium text-muted-foreground">
@@ -343,19 +341,6 @@ const toggleVisibility = (review: ProductReviewItem) => {
                             <div class="mt-2 flex items-center gap-2">
                                 <span class="text-2xl font-bold text-amber-500">{{ rating_stats.average_rating.toFixed(1) }}</span>
                                 <span class="text-xs text-muted-foreground">/ 5.0 ({{ rating_stats.total_count }} ulasan)</span>
-                            </div>
-                        </CardContent>
-                    </Card>
-                    <Card class="bg-background">
-                        <CardContent class="p-5">
-                            <div class="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                                <ScanFace class="h-4 w-4" />
-                                Virtual Try-On
-                            </div>
-                            <div class="mt-2 flex items-center gap-2">
-                                <span class="text-base font-bold" :class="product.is_virtual_try_on ? 'text-primary' : 'text-muted-foreground'">
-                                    {{ product.is_virtual_try_on ? 'Didukung' : 'Tidak' }}
-                                </span>
                             </div>
                         </CardContent>
                     </Card>

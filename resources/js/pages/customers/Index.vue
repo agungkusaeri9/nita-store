@@ -84,7 +84,7 @@ const props = defineProps<Props>();
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Customer', href: '/customers' },
+    { title: 'Customer', href: '/dashboard/customers' },
 ];
 
 const search = ref(props.filters.search || '');
@@ -102,7 +102,7 @@ let searchTimeout: ReturnType<typeof setTimeout>;
 
 const fetchCustomers = () => {
     isLoading.value = true;
-    router.get('/customers', {
+    router.get('/dashboard/customers', {
         search: search.value,
         status: status.value,
         per_page: perPage.value
@@ -135,7 +135,7 @@ const confirmDelete = (customer: Customer) => {
 
 const executeDelete = () => {
     if (customerToDelete.value) {
-        router.delete(`/customers/${customerToDelete.value.id}`, {
+        router.delete(`/dashboard/customers/${customerToDelete.value.id}`, {
             onSuccess: () => {
                 isDeleteDialogOpen.value = false;
                 customerToDelete.value = null;
@@ -290,13 +290,13 @@ const executeDelete = () => {
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align="end" class="w-[160px]">
                                         <DropdownMenuItem as-child>
-                                            <Link :href="`/customers/${customer.id}`" class="flex items-center cursor-pointer">
+                                            <Link :href="`/dashboard/customers/${customer.id}`" class="flex items-center cursor-pointer">
                                                 <Eye class="mr-2 h-4 w-4" />
                                                 Lihat Detail
                                             </Link>
                                         </DropdownMenuItem>
                                         <DropdownMenuItem as-child>
-                                            <Link :href="`/customers/${customer.id}/edit`" class="flex items-center cursor-pointer">
+                                            <Link :href="`/dashboard/customers/${customer.id}/edit`" class="flex items-center cursor-pointer">
                                                 <Edit class="mr-2 h-4 w-4" />
                                                 Edit Data
                                             </Link>

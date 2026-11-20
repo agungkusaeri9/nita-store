@@ -15,11 +15,9 @@ use App\Repositories\Contracts\PaymentMethodRepositoryInterface;
 use App\Repositories\Contracts\PermissionRepositoryInterface;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Repositories\Contracts\ProductReviewRepositoryInterface;
-use App\Repositories\Contracts\ProductVirtualTryOnRepositoryInterface;
 use App\Repositories\Contracts\RoleRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\Contracts\VariantTypeRepositoryInterface;
-use App\Repositories\Contracts\VirtualTryOnModelRepositoryInterface;
 use App\Repositories\Eloquent\ActivityLogRepository;
 use App\Repositories\Eloquent\AppConfigRepository;
 use App\Repositories\Eloquent\BannerRepository;
@@ -33,11 +31,9 @@ use App\Repositories\Eloquent\PaymentMethodRepository;
 use App\Repositories\Eloquent\PermissionRepository;
 use App\Repositories\Eloquent\ProductRepository;
 use App\Repositories\Eloquent\ProductReviewRepository;
-use App\Repositories\Eloquent\ProductVirtualTryOnRepository;
 use App\Repositories\Eloquent\RoleRepository;
 use App\Repositories\Eloquent\UserRepository;
 use App\Repositories\Eloquent\VariantTypeRepository;
-use App\Repositories\Eloquent\VirtualTryOnModelRepository;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Date;
@@ -70,8 +66,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ProductReviewRepositoryInterface::class, ProductReviewRepository::class);
         $this->app->bind(BannerRepositoryInterface::class, BannerRepository::class);
         $this->app->bind(AppConfigRepositoryInterface::class, AppConfigRepository::class);
-        $this->app->bind(VirtualTryOnModelRepositoryInterface::class, VirtualTryOnModelRepository::class);
-        $this->app->bind(ProductVirtualTryOnRepositoryInterface::class, ProductVirtualTryOnRepository::class);
     }
 
     /**

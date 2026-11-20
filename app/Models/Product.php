@@ -23,13 +23,11 @@ class Product extends Model
         'stock',
         'sku',
         'weight',
-        'is_virtual_try_on',
         'is_active',
     ];
 
     protected $casts = [
         'price' => 'decimal:2',
-        'is_virtual_try_on' => 'boolean',
         'is_active' => 'boolean',
     ];
 
@@ -57,9 +55,9 @@ class Product extends Model
         return $this->hasMany(ProductReview::class);
     }
 
-    public function virtualTryOns(): HasMany
+    public function orderDetails(): HasMany
     {
-        return $this->hasMany(ProductVirtualTryOn::class);
+        return $this->hasMany(OrderDetail::class);
     }
 
     public function getPrimaryImageUrlAttribute(): ?string

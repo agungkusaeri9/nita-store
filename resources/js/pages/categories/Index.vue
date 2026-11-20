@@ -71,7 +71,7 @@ const props = defineProps<Props>();
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Produk', href: '#' },
-    { title: 'Kategori Produk', href: '/categories' },
+    { title: 'Kategori Produk', href: '/dashboard/categories' },
 ];
 
 const filterState = reactive({
@@ -88,7 +88,7 @@ const buildQuery = () => ({
 // Search functionality
 const debouncedSearch = useDebounceFn(() => {
     router.get(
-        '/categories',
+        '/dashboard/categories',
         buildQuery(),
         { preserveState: true, replace: true },
     );
@@ -116,7 +116,7 @@ const confirmDelete = (category: Category) => {
 
 const executeDelete = () => {
     if (categoryToDelete.value) {
-        router.delete(`/categories/${categoryToDelete.value.id}`, {
+        router.delete(`/dashboard/categories/${categoryToDelete.value.id}`, {
             onSuccess: () => {
                 isDeleteDialogOpen.value = false;
                 categoryToDelete.value = null;
@@ -151,7 +151,7 @@ const perPageOptions = ['10', '20', '30', '40', '50', '100'];
             </div>
 
             <Button v-if="can('create categories')" as-child class="shrink-0">
-                <Link href="/categories/create">
+                <Link href="/dashboard/categories/create">
                     <Plus class="mr-2 h-4 w-4" />
                     Tambah Kategori
                 </Link>
@@ -326,7 +326,7 @@ const perPageOptions = ['10', '20', '30', '40', '50', '100'];
                                         as-child
                                         title="Edit Kategori"
                                     >
-                                        <Link :href="`/categories/${category.id}/edit`">
+                                        <Link :href="`/dashboard/categories/${category.id}/edit`">
                                             <Edit class="h-4 w-4" />
                                         </Link>
                                     </Button>

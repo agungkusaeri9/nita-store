@@ -49,7 +49,7 @@ const props = defineProps<Props>();
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Peran & Hak Akses', href: '#' },
-    { title: 'Hak Akses (Permissions)', href: '/permissions' },
+    { title: 'Hak Akses (Permissions)', href: '/dashboard/permissions' },
 ];
 
 const filterState = reactive({
@@ -60,7 +60,7 @@ const filterState = reactive({
 // Search functionality
 const debouncedSearch = useDebounceFn(() => {
     router.get(
-        '/permissions',
+        '/dashboard/permissions',
         { ...filterState },
         { preserveState: true, replace: true },
     );
