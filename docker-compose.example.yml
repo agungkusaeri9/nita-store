@@ -7,7 +7,7 @@ services:
       args:
         USER_ID: 1000
         GROUP_ID: 1000
-    container_name: ecommerce-batik-app
+    container_name: nita-store-app
     restart: unless-stopped
     working_dir: /var/www/html
     env_file:
@@ -26,7 +26,7 @@ services:
   # Nginx Web Server Service
   web:
     image: nginx:alpine
-    container_name: ecommerce-batik-web
+    container_name: nita-store-web
     restart: unless-stopped
     ports:
       - "${APP_PORT:-8000}:80"
@@ -46,7 +46,7 @@ services:
       args:
         USER_ID: 1000
         GROUP_ID: 1000
-    container_name: ecommerce-batik-queue
+    container_name: nita-store-queue
     restart: unless-stopped
     working_dir: /var/www/html
     command: php artisan queue:work --tries=3 --timeout=90
