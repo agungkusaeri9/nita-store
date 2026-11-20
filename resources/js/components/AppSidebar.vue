@@ -84,7 +84,7 @@ const rawNavItems = computed<NavItem[]>(() => [
         icon: Database,
         items: [
             {
-                title: 'Kelola User',
+                title: 'Pengguna',
                 href: '/dashboard/users',
                 icon: UserCog,
                 permission: 'view users',

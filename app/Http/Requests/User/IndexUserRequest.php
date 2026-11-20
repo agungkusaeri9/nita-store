@@ -15,6 +15,7 @@ class IndexUserRequest extends FormRequest
     {
         return [
             'search' => ['nullable', 'string', 'max:255'],
+            'role' => ['nullable', 'string', 'max:100'],
             'per_page' => ['nullable', 'integer', 'min:1', 'max:100'],
             'page' => ['nullable', 'integer', 'min:1'],
         ];
@@ -22,7 +23,7 @@ class IndexUserRequest extends FormRequest
 
     public function filters(): array
     {
-        return $this->only(['search', 'per_page']);
+        return $this->only(['search', 'role', 'per_page']);
     }
 
     public function perPage(): int

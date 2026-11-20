@@ -59,8 +59,10 @@ interface Props {
     };
     filters: {
         search?: string;
+        role?: string;
         per_page?: string;
     };
+    roles: string[];
 }
 
 const props = defineProps<Props>();
@@ -72,14 +74,19 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 const filterState = reactive({
     search: props.filters.search || '',
+    role: props.filters.role || 'all',
     per_page: props.filters.per_page || '10',
 });
 
-// Search functionality
+// Search & filter functionality
 const debouncedSearch = useDebounceFn(() => {
     router.get(
         '/dashboard/users',
-        { ...filterState },
+        {
+            ...(filterState.search ? { search: filterState.search } : {}),
+            ...(filterState.role && filterState.role !== 'all' ? { role: filterState.role } : {}),
+            per_page: filterState.per_page,
+        },
         { preserveState: true, replace: true },
     );
 }, 300);
@@ -182,24 +189,43 @@ const perPageOptions = ['10', '20', '30', '40', '50', '100'];
                     <span>data</span>
                 </div>
 
-                <div class="relative w-full max-w-xs sm:w-64">
-                    <Search
-                        class="absolute top-2.5 left-2.5 h-4 w-4 text-muted-foreground"
-                    />
-                    <Input
-                        v-model="filterState.search"
-                        type="search"
-                        placeholder="Cari pengguna..."
-                        class="h-8 pr-8 pl-8 text-xs"
-                    />
-                    <button
-                        v-if="filterState.search"
-                        type="button"
-                        class="absolute top-2 right-2 text-muted-foreground hover:text-foreground"
-                        @click="clearSearch"
-                    >
-                        <X class="h-4 w-4" />
-                    </button>
+                <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <Select v-model="filterState.role">
+                        <SelectTrigger class="h-8 w-full text-xs sm:w-44">
+                            <SelectValue placeholder="Semua Peran" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="all">Semua Peran</SelectItem>
+                            <SelectItem
+                                v-for="roleName in roles"
+                                :key="roleName"
+                                :value="roleName"
+                                class="capitalize"
+                            >
+                                {{ roleName }}
+                            </SelectItem>
+                        </SelectContent>
+                    </Select>
+
+                    <div class="relative w-full max-w-xs sm:w-64">
+                        <Search
+                            class="absolute top-2.5 left-2.5 h-4 w-4 text-muted-foreground"
+                        />
+                        <Input
+                            v-model="filterState.search"
+                            type="search"
+                            placeholder="Cari pengguna..."
+                            class="h-8 pr-8 pl-8 text-xs"
+                        />
+                        <button
+                            v-if="filterState.search"
+                            type="button"
+                            class="absolute top-2 right-2 text-muted-foreground hover:text-foreground"
+                            @click="clearSearch"
+                        >
+                            <X class="h-4 w-4" />
+                        </button>
+                    </div>
                 </div>
             </div>
 

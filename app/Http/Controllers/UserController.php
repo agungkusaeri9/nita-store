@@ -10,6 +10,7 @@ use App\Services\RoleService;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -31,6 +32,12 @@ class UserController extends Controller
                 'roles' => $user->roles->pluck('name')->toArray(),
             ]),
             'filters' => $request->filters(),
+            'roles' => Role::query()
+                ->where('guard_name', 'web')
+                ->orderBy('name')
+                ->pluck('name')
+                ->values()
+                ->all(),
         ]);
     }
 

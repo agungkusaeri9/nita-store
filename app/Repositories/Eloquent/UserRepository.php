@@ -19,6 +19,11 @@ class UserRepository implements UserRepositoryInterface
                         ->orWhere('username', 'like', "%{$search}%");
                 });
             })
+            ->when($filters['role'] ?? null, function ($query, $role) {
+                $query->whereHas('roles', function ($q) use ($role) {
+                    $q->where('name', $role);
+                });
+            })
             ->latest()
             ->paginate($perPage)
             ->withQueryString();

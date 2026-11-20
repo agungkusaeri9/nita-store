@@ -36,6 +36,7 @@ use App\Repositories\Eloquent\UserRepository;
 use App\Repositories\Eloquent\VariantTypeRepository;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -78,6 +79,13 @@ class AppServiceProvider extends ServiceProvider
 
         if (str_starts_with((string) config('app.url'), 'https://')) {
             URL::forceScheme('https');
+            Paginator::currentPathResolver(function (): string {
+                $url = request()->url();
+
+                return str_starts_with($url, 'http://')
+                    ? 'https://'.substr($url, 7)
+                    : $url;
+            });
         }
 
         $this->configureDefaults();
